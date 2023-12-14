@@ -102,7 +102,7 @@ int AllCellTaken(){
     }
     return 1;
 }
-void main(){
+int main(){
     int choosenCell;
     int currPlayer =1;
     int winner = 0;
@@ -121,9 +121,13 @@ void main(){
         }
         if (AllCellTaken()==1&&winner ==0){
             printf("No possible move");
-            return NULL;
+            return 0;
         }
     }
     printTheTable();
     printf("\nWinner - Player %d Congrats!",winner);
+
+getchar(); getchar(); getchar(); getchar();
+getchar(); getchar(); getchar(); getchar();
+return 1;
 }
