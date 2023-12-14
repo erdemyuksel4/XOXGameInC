@@ -8,7 +8,7 @@ void printTheTable(){
     int c =0;
     do{
         for(int i = 0;i<3;i++){
-            char playerSymbol;
+            
             if(cells[3*c+i]==1){
                 printf(" %s ","X");
             }else if (cells[3*c+i]==2){
@@ -42,10 +42,11 @@ int findAndChangeCell(int cell,int player){
             }
         }
     }
+    return 0;
 }
 int CrossCheck(){
 
-    int r = 0;
+
 
 
     if(!((cells[9]!=0&&cells[0]!=0&&cells[4]!=0&& cells[4]==cells[0]&&cells[4]==cells[9])||(((cells[6]!=0&&cells[4]!=0&&cells[2]!=0&& cells[4]==cells[2]&&cells[4]==cells[6]))))){
@@ -58,7 +59,7 @@ int CrossCheck(){
 int RowCheck(){
 
     for(int i=0;i<3;i++){
-        if(cells[i+3]!=0&&cells[i+6]!=0&&cells[i]!=0&&cells[i+3]==cells[i]&&cells[i+3]==cells[i+3]){
+        if(cells[i+3]!=0&&cells[i+6]!=0&&cells[i]!=0&&cells[i+3]==cells[i]&&cells[i+3]==cells[i+6]){
             return 1;
         }
     }
@@ -112,6 +113,10 @@ int main(){
         printTheTable();
         printf("\n");
         scanf("%d",&choosenCell);
+        if(choosenCell>9||choosenCell<=0){
+            printf("\nYou have to choose cell between 0 and 9\n");
+            continue;
+        }
         int resultPlay = findAndChangeCell(choosenCell,currPlayer);
         winner = (WinnerCheck()==1)?currPlayer:0;
         if(resultPlay==1){
@@ -127,7 +132,7 @@ int main(){
     printTheTable();
     printf("\nWinner - Player %d Congrats!",winner);
 
-getchar(); getchar(); getchar(); getchar();
-getchar(); getchar(); getchar(); getchar();
+getchar(); 
+getchar(); 
 return 1;
 }
