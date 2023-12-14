@@ -2,16 +2,16 @@
 
 // player 1 = 1 - X
 // player 2 = 2 - O
-int cells[3][3];
+int cells[9];
 void printTheTable();
 void printTheTable(){
     int c =0;
     do{
         for(int i = 0;i<3;i++){
             char playerSymbol;
-            if(cells[c][i]==1){
+            if(cells[3*c+i]==1){
                 printf(" %s ","X");
-            }else if (cells[c][i]==2){
+            }else if (cells[3*c+i]==2){
                 printf(" %s ","O");
             }else{
                 printf(" %d ",(3*c+i+1));
@@ -33,8 +33,8 @@ int findAndChangeCell(int cell,int player){
         for(int j=0;j<3;j++){
 
             if (3*i+j+1==cell){
-                if(cells[i][j]==0){
-                    cells[i][j]= player;
+                if(cells[3*i+j]==0){
+                    cells[3*i+j]= player;
                     return 1;
                 }else{
                     return 0;
@@ -44,31 +44,30 @@ int findAndChangeCell(int cell,int player){
     }
 }
 int CrossCheck(){
-    int lastCell = cells[0][0];
-    for(int i =1;i<3;i++){
-        if (cells[i][i]==0||lastCell==0||cells[i][i]!=lastCell){
-            return 0;
-        }
+
+    int r = 0;
+
+
+    if(!((cells[9]!=0&&cells[0]!=0&&cells[4]!=0&& cells[4]==cells[0]&&cells[4]==cells[9])||(((cells[6]!=0&&cells[4]!=0&&cells[2]!=0&& cells[4]==cells[2]&&cells[4]==cells[6]))))){
+
+        return 0;
     }
+
     return 1;
 }
 int RowCheck(){
+
     for(int i=0;i<3;i++){
-        if(cells[i][2]!=0&&cells[i][0]!=0&&cells[i][1]!=0&&cells[i][0]==cells[i][1]&&cells[i][1]==cells[i][2]){
+        if(cells[i+3]!=0&&cells[i+6]!=0&&cells[i]!=0&&cells[i+3]==cells[i]&&cells[i+3]==cells[i+3]){
             return 1;
         }
     }
     return 0;
 }
 int ColumnCheck(){
-    for(int i=0;i<3;i++){
 
-        for (int j =0;j<3;j++){
-            if(cells[j][i]==0){
-                return 0;
-            }
-        }
-        if(cells[0][i]==cells[1][i]&&cells[1][i]==cells[2][i]){
+    for(int i=0;i<3;i++){
+        if(cells[3*i+1]!=0&&cells[3*i+2]!=0&&cells[3*i]!=0&&cells[3*i]==cells[3*i+1]&&cells[3*i+1]==cells[3*i+2]){
             return 1;
         }
     }
@@ -76,14 +75,17 @@ int ColumnCheck(){
 }
 int WinnerCheck(){
     if(1==CrossCheck()){
+
             return 1;
 
     }
     if(1==RowCheck()){
+
             return 1;
 
     }
     if(1==ColumnCheck()){
+
             return 1;
 
 
@@ -91,12 +93,12 @@ int WinnerCheck(){
     return 0;
 }
 int AllCellTaken(){
-    for (int i = 0; i<3;i++){
-        for (int j =0;j<3;j++){
-            if(cells[i][j]==0){
-                return 0;
-            }
+    for (int i = 0; i<9;i++){
+
+        if(cells[i]==0){
+            return 0;
         }
+
     }
     return 1;
 }
